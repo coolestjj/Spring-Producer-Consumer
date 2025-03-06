@@ -13,7 +13,9 @@ public class KafkaConsumerService {
     @Value("${kafka.topic.name}")
     private String topic;
 
-    @KafkaListener(topics = "${kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${kafka.topic.name}",
+            groupId = "${spring.kafka.consumer.group-id}",
+            containerFactory = "kafkaListenerContainerFactory")
     public void listenGroupFoo(String message) {
         System.out.println("Received message: " + message + " from group: " + consumerGroupId + " with topic: " + topic);
     }
